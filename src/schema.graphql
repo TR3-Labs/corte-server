@@ -1,0 +1,31 @@
+type Mutation {
+    
+}
+
+type User {
+    id: ID!
+    email: String!,
+    name: String!,
+    picture: String!,
+    joinedGroups: [Group!]!
+}
+
+type Group {
+    id: ID!,
+    name: String!,
+    participants: [User!]!,
+    payments: [Payment!]!
+}
+
+enum StrategyType {
+    EQUALLY
+    UNEQUALLY
+}
+
+type Payment {
+    id: ID!,
+    type: String!,
+    payee: User!,
+    strategy: StrategyType!,
+    amount: Float!
+}
