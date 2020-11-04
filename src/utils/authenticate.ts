@@ -1,16 +1,27 @@
 import {OAuth2Client, TokenPayload} from 'google-auth-library';
-
 const client = new OAuth2Client(process.env.CLIENT_ID);
 
+const authenticate = async (token: string, clientId: string):Promise<TokenPayload> | null => {
+    try {
+        return await verify(token, clientId);
+    }
+    catch (error) {
+        return null;
+    }
+};
+
 async function verify(token: string, clientId: string): Promise<TokenPayload> {
-    const ticket = await client.verifyIdToken({
-        idToken: token,
-        audience: clientId
-    });
-    const payload = ticket.getPayload();
-    // const userid = payload['sub'];
-    // check
-    return payload;
+    try {
+        const ticket = await client.verifyIdToken({
+            idToken: token,
+            audience: clientId
+        });
+        const payload = ticket.getPayload();
+        return payload;
+    }
+    catch (err) {
+        throw new Error(err);
+    }
 }
 
-export default verify;
+export default authenticate;
