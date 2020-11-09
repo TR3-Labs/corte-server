@@ -1,4 +1,5 @@
 import User from '../models/User';
+import jwt from 'jsonwebtoken';
 
 interface UserI {
     email: string,
@@ -8,7 +9,8 @@ interface UserI {
 
 export const addUser = async (user: UserI): Promise<unknown> => {
     try {
-        return await new User(user).save();
+        const retUser = await new User(user).save();
+        return jwt.sign(retUser, process.env.JWT_SECRET_KEY);
     }
     catch (err) { return err;}
 };

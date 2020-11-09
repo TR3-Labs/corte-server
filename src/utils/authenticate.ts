@@ -17,6 +17,7 @@ async function verify(token: string, clientId: string): Promise<TokenPayload> {
             audience: clientId
         });
         const payload = ticket.getPayload();
+        console.log(payload);
         return payload;
     }
     catch (err) {
