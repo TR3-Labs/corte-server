@@ -5,5 +5,5 @@ Corte makes it easier to manage group expenses and removes ambiguity and need of
 ### Run locally
 ```
 npm install
-npm start
+npm run dev
 ```
