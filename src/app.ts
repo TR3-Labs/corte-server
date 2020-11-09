@@ -3,7 +3,7 @@ dotenv.config();
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import {graphqlHTTP} from 'express-graphql';
+import { graphqlHTTP } from 'express-graphql';
 
 import dbConnection from './config/db';
 import schema from './schema/schema';
@@ -17,5 +17,9 @@ app.use('/graphql', graphqlHTTP({
     graphiql: true
 }));
 
+app.get('/', (req, res) => {
+    res.send('home page');
+});
+
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server started on PORT ${PORT}`))
+app.listen(PORT, () => console.log(`Server started on PORT ${PORT}`));
