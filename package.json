@@ -2,12 +2,12 @@
   "name": "corte-server",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/app.js",
+  "main": "build/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon",
     "build": "tsc",
-    "start": "ts-node build/app.js",
+    "start": "node build/app.js",
     "lint": "eslint . --ext .ts"
   },
   "author": "",
