@@ -1,30 +1,27 @@
 import User from '../models/User';
-import jwt from 'jsonwebtoken';
+import { UserDocument } from '../interfaces/document';
+import { UserInterface, AuthPayloadInterface } from '../interfaces/type';
+import { signJwt } from '../utils/authenticate';
 
-interface UserI {
-    email: string,
-    name: string,
-    picture: string
-}
-
-export const addUser = async (user: UserI): Promise<unknown> => {
+export const addUser = async (user: UserInterface): Promise<AuthPayloadInterface> => {
     try {
-        const retUser = await new User(user).save();
-        return jwt.sign(retUser, process.env.JWT_SECRET_KEY);
+        const newUser: UserDocument = await new User(user).save();
+
+        return signJwt(newUser);
     }
-    catch (err) { return err;}
+    catch (err: any) { return err; }
 };
 
-export const hasAccount = async (user: UserI): Promise<unknown> => {
+export const hasAccount = async (user: UserInterface): Promise<AuthPayloadInterface> => {
     try {
-        const retUser = await User.findOne(user);
-        if (!retUser)
+        const oldUser = await User.findOne(user);
+        if (!oldUser)
             return addUser(user);
-        return retUser;
+        return signJwt(oldUser);
     }
-    catch (err) { return err;}
+    catch (err) { return err; }
 };
 
-export const signInUser = (user: UserI): Promise<unknown> => {
+export const signInUser = (user: UserInterface): Promise<AuthPayloadInterface> => {
     return hasAccount(user);
 };

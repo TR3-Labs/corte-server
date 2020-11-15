@@ -21,6 +21,7 @@
         "space-before-blocks": 2,
         "keyword-spacing":"error",
         "no-unused-vars":"error",
-        "key-spacing":"error"
+        "key-spacing":"error",
+        "no-non-nul-null-assertion": true
     }
 }

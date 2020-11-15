@@ -1,5 +1,5 @@
 type Mutation {
-    
+    signUser(token: String!, clientId: String!): AuthPayload
 }
 
 type User {
@@ -8,6 +8,11 @@ type User {
     name: String!,
     picture: String!,
     joinedGroups: [Group!]!
+}
+
+type AuthPayload {
+    token: String,
+    user: User
 }
 
 type Group {
