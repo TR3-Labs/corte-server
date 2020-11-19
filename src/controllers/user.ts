@@ -1,9 +1,15 @@
 import User from '../models/User';
 import { UserDocument } from '../interfaces/document';
-import { UserInterface, AuthPayloadInterface } from '../interfaces/type';
+import { AuthPayloadInterface } from '../interfaces/type';
 import { signJwt } from '../utils/authenticate';
 
-export const addUser = async (user: UserInterface): Promise<AuthPayloadInterface> => {
+interface SignUserInterface {
+    email: string,
+    name: string,
+    picture: string
+}
+
+export const addUser = async (user: SignUserInterface): Promise<AuthPayloadInterface> => {
     try {
         const newUser: UserDocument = await new User(user).save();
 
@@ -12,7 +18,7 @@ export const addUser = async (user: UserInterface): Promise<AuthPayloadInterface
     catch (err: any) { return err; }
 };
 
-export const hasAccount = async (user: UserInterface): Promise<AuthPayloadInterface> => {
+export const hasAccount = async (user: SignUserInterface): Promise<AuthPayloadInterface> => {
     try {
         const oldUser = await User.findOne(user);
         if (!oldUser)
@@ -22,6 +28,6 @@ export const hasAccount = async (user: UserInterface): Promise<AuthPayloadInterf
     catch (err) { return err; }
 };
 
-export const signInUser = (user: UserInterface): Promise<AuthPayloadInterface> => {
+export const signInUser = (user: SignUserInterface): Promise<AuthPayloadInterface> => {
     return hasAccount(user);
 };

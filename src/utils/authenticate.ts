@@ -1,10 +1,11 @@
-import {OAuth2Client, TokenPayload} from 'google-auth-library';
+import { OAuth2Client, TokenPayload } from 'google-auth-library';
 import jwt from 'jsonwebtoken';
-import {UserDocument} from '../interfaces/document';
+import { UserDocument } from '../interfaces/document';
+import { UserInterface } from '../interfaces/type';
 
 const client = new OAuth2Client(process.env.CLIENT_ID);
 
-const authenticate = async (token: string, clientId: string):Promise<TokenPayload | undefined> => {
+const authenticate = async (token: string, clientId: string): Promise<TokenPayload | undefined> => {
     try {
         return await verify(token, clientId);
     }
@@ -39,6 +40,17 @@ export function signJwt(user: UserDocument) {
     return {
         token,
         user
+    }
+}
+
+export function verifyJwt(token: string): UserInterface | null {
+    try {
+        const secret: string = process.env.JWT_SECRET_KEY!;
+        const user = <UserInterface>jwt.verify(token, secret);
+        return user;
+    }
+    catch (error) {
+        return null;
     }
 }
 

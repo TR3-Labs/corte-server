@@ -22,6 +22,11 @@ type Group {
     payments: [Payment!]!
 }
 
+type Distribution {
+    user: User
+    amount: Float
+}
+
 enum StrategyType {
     EQUALLY
     UNEQUALLY
@@ -29,8 +34,9 @@ enum StrategyType {
 
 type Payment {
     id: ID!,
-    type: String!,
+    paymentType: String!,
     payee: User!,
     strategy: StrategyType!,
-    amount: Float!
+    totalAmount: Float!
+    distribution: [Distribution]
 }
