@@ -1,0 +1,42 @@
+type Mutation {
+    signUser(token: String!, clientId: String!): AuthPayload
+}
+
+type User {
+    id: ID!
+    email: String!,
+    name: String!,
+    picture: String!,
+    joinedGroups: [Group!]!
+}
+
+type AuthPayload {
+    token: String,
+    user: User
+}
+
+type Group {
+    id: ID!,
+    name: String!,
+    participants: [User!]!,
+    payments: [Payment!]!
+}
+
+type Distribution {
+    user: User
+    amount: Float
+}
+
+enum StrategyType {
+    EQUALLY
+    UNEQUALLY
+}
+
+type Payment {
+    id: ID!,
+    paymentType: String!,
+    payee: User!,
+    strategy: StrategyType!,
+    totalAmount: Float!
+    distribution: [Distribution]
+}
