@@ -4,7 +4,8 @@ export interface UserDocument extends Document {
     id: string,
     email: string,
     name: string
-    picture: string
+    picture: string,
+    joinedGroups: Array<string>,
 };
 
 export interface GroupDocument extends Document {
