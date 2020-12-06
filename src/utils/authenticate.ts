@@ -5,7 +5,7 @@ import { UserInterface } from '../interfaces/type';
 
 const client = new OAuth2Client(process.env.CLIENT_ID);
 
-const authenticate = async (token: string, clientId: string): Promise<TokenPayload | undefined> => {
+const authenticate = async (token: string, clientId: string): Promise<TokenPayload | void> => {
     try {
         return await verify(token, clientId);
     }
