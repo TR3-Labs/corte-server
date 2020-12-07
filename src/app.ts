@@ -25,11 +25,12 @@ app.get('/', (req, res) => {
 });
 
 app.get('/graphql-schema', (req, res) => {
-    fs.readFile(path.join(__dirname, '../public/schema.graphql'), (err, data) => {
-        if(err) throw err;
-        res.send(data)
+    fs.readFile(path.join(__dirname, "../public/schema.graphql"), "utf-8", (err, data) => {
+        if (err)
+            res.status(500).send("Unable to load schema");
+        res.send(data);
     });
-})
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server started on PORT ${PORT}`));

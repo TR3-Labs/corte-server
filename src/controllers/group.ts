@@ -13,11 +13,11 @@ export const addGroup = async (groupName: string, userId: string): Promise<Group
         await User.updateOne(
             { id: userId },
             { $push: { joinedGroups: newGroup.id } }
-        )
+        );
         return newGroup;
     }
-    catch(error) {
+    catch (error) {
         console.log('Add group error');
         return error;
     }
-}
+};

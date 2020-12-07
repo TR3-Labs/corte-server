@@ -22,6 +22,6 @@
         "keyword-spacing":"error",
         "no-unused-vars":"error",
         "key-spacing":"error",
-        "no-non-nul-null-assertion": true
+        "@typescript-eslint/no-non-null-assertion": 0
     }
 }
