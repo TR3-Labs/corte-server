@@ -1,6 +1,5 @@
 import {GraphQLObjectType, GraphQLID} from 'graphql';
 import UserType from './types/user';
-import GroupType from './types/group';
 
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',

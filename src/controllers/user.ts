@@ -15,7 +15,7 @@ export const addUser = async (user: SignUserInterface): Promise<AuthPayloadInter
 
         return signJwt(newUser);
     }
-    catch (err: any) { return err; }
+    catch (err) { return err; }
 };
 
 export const hasAccount = async (user: SignUserInterface): Promise<AuthPayloadInterface> => {

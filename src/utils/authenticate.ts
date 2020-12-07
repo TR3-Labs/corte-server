@@ -1,7 +1,7 @@
 import { OAuth2Client, TokenPayload } from 'google-auth-library';
 import jwt from 'jsonwebtoken';
 import { UserDocument } from '../interfaces/document';
-import { UserInterface } from '../interfaces/type';
+import { UserInterface, AuthPayloadInterface } from '../interfaces/type';
 
 const client = new OAuth2Client(process.env.CLIENT_ID);
 
@@ -29,7 +29,7 @@ async function verify(token: string, clientId: string): Promise<TokenPayload | u
     }
 }
 
-export function signJwt(user: UserDocument) {
+export function signJwt(user: UserDocument): AuthPayloadInterface {
     const secret: string = process.env.JWT_SECRET_KEY!;
     const token = jwt.sign({
         id: user._id,
@@ -40,7 +40,7 @@ export function signJwt(user: UserDocument) {
     return {
         token,
         user
-    }
+    };
 }
 
 export function verifyJwt(token: string): UserInterface | null {

@@ -6,7 +6,7 @@ export interface UserDocument extends Document {
     name: string
     picture: string,
     joinedGroups: Array<string>,
-};
+}
 
 export interface GroupDocument extends Document {
     id: string,
