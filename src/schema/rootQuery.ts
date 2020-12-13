@@ -1,6 +1,7 @@
-import {GraphQLObjectType, GraphQLID} from 'graphql';
+import { GraphQLObjectType, GraphQLID } from 'graphql';
 import UserType from './types/user';
 import GroupType from './types/group';
+import { getGroup } from '../controllers/group';
 
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
@@ -12,6 +13,13 @@ const RootQuery = new GraphQLObjectType({
                 // get data from db/other source
                 console.log(args.id);
                 return parent;
+            }
+        },
+        group: {
+            type: GroupType,
+            args: { id: { type: GraphQLID } },
+            resolve: (parent, args) => {
+                return getGroup(args.id)
             }
         }
     }

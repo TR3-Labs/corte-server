@@ -9,6 +9,7 @@ interface SignUserInterface {
     picture: string
 }
 
+// Adds a new user to Corte. Returns JWT token
 export const addUser = async (user: SignUserInterface): Promise<AuthPayloadInterface> => {
     try {
         const newUser: UserDocument = await new User(user).save();
@@ -20,7 +21,7 @@ export const addUser = async (user: SignUserInterface): Promise<AuthPayloadInter
 
 export const hasAccount = async (user: SignUserInterface): Promise<AuthPayloadInterface> => {
     try {
-        const oldUser = await User.findOne(user);
+        const oldUser = await User.findOne({email: user.email});
         if (!oldUser)
             return addUser(user);
         return signJwt(oldUser);
@@ -28,6 +29,7 @@ export const hasAccount = async (user: SignUserInterface): Promise<AuthPayloadIn
     catch (err) { return err; }
 };
 
+// Signin/Login user. Returns JWT token
 export const signInUser = (user: SignUserInterface): Promise<AuthPayloadInterface> => {
     return hasAccount(user);
 };

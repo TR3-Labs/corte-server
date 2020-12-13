@@ -10,8 +10,8 @@ export interface UserDocument extends Document {
 export interface GroupDocument extends Document {
     id: string,
     name: string,
-    participants: Array<string>,
-    payments: Array<string>
+    participants?: Array<UserDocument>,
+    payments?: Array<string>
 }
 
 export interface PaymentDocument extends Document {
